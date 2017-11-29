@@ -1,17 +1,4 @@
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
+//Alessandro D'Orazio 2017
 function comuneCf (codiceFiscale) {
 	var codiceCatastale = codiceFiscale.substring(11,15);
 	if(codiceFiscale.charAt(12) == 'Z') return "Estero";
