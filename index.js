@@ -1,26 +1,12 @@
 //Alessandro D'Orazio 2017
-function comuneCf (codiceFiscale) {
-	var codiceCatastale = codiceFiscale.substring(11,15);
-	if(codiceFiscale.charAt(12) == 'Z') return "Estero";
-	var result = comuni.filter(function( obj ) {
-		return obj.codiceCatastale == codiceCatastale;
-	});
-	return result[0].nome;
-}
+const MESI = { A: '01', B: '02', C: '03', D: '04', E: '05', H: '06', L: '07', M: '08', P: '09', R: '10', S: '11', T: '12' };
+
+function comuneCf (codiceFiscale) { return codiceFiscale.charAt(12) == 'Z' ? "Estero" : COMUNI[codiceFiscale.substring(11,15)]; }
+
 function dataCf (codiceFiscale) {
-	var mesi = [{"sigla" : "A", "mese": "Gennaio", "progressivo" : "01"},{"sigla" : "B", "mese": "Febbraio", "progressivo" : "02"},{"sigla" : "C", "mese": "Marzo", "progressivo" : "03"},{"sigla" : "D", "mese": "Aprile", "progressivo" : "04"},{"sigla" : "E", "mese": "Maggio", "progressivo" : "05"},{"sigla" : "H", "mese": "Giugno", "progressivo" : "06"},{"sigla" : "L", "mese": "Luglio", "progressivo" : "07"},{"sigla" : "M", "mese": "Agosto", "progressivo" : "08"},{"sigla" : "P", "mese": "Settembre", "progressivo" : "09"},{"sigla" : "R", "mese": "Ottobre", "progressivo" : "10"},{"sigla" : "S", "mese": "Novembre", "progressivo" : "11"},{"sigla" : "T", "mese": "Dicembre", "progressivo" : "12"}];
-	var anno = codiceFiscale.substring(6,8);
-	var giorno = codiceFiscale.substring(9,11);
-	var mese_num = codiceFiscale.charAt(8);
-	var mese = mesi.filter(function( obj ) {
-		return obj.sigla == mese_num;
-	});
-	if(anno<20) anno = "20" + anno; else anno = "19" + anno;
-	if(giorno>40) giorno = giorno-40;
-	return anno + "/" + mese[0].progressivo + "/" + giorno;
+	let [ anno, giorno ] = [ codiceFiscale.substring(6,8), codiceFiscale.substring(9,11) ];
+	if (giorno>40) giorno -= 40;
+	return  (anno < 20 ? "20" : "19" ) + anno + "/" + MESI[codiceFiscale.charAt(8)] + "/" + giorno;
 }
-function sessoCf (codiceFiscale) {
-	var giorno = codiceFiscale.substring(9,11);
-	if(giorno>40) return "F";
-	return "M";
-}
+
+function sessoCf (codiceFiscale) { return codiceFiscale.substring(9,11) > 40 ? "F" : "M"; }
