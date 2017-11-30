@@ -20,7 +20,7 @@ function dataCf (codiceFiscale) {
 function sessoCf (codiceFiscale) { return codiceFiscale.substring(9,11) > 40 ? "F" : "M"; }
 
 function carattereControllo(inizioCodiceFiscale) {
-	return CHECK[[...codiceFiscale].map( l=> l.toUpperCase() ).reduce( (prev, succ, i)=> prev + (i % 2 === 1 ? even(succ) : odd(succ) ) , 0) % 26 ];
+	return CHECK[[inizioCodiceFiscale].map( l=> l.toUpperCase() ).reduce( (prev, succ, i)=> prev + (i % 2 === 1 ? even(succ) : odd(succ) ) , 0) % 26 ];
 }
 
 function controllaCodice(codiceFiscale) { return carattereControllo(codiceFiscale.slice(0,-1)) === codiceFiscale.slice(-1) }
