@@ -5,8 +5,8 @@ function comuneCf (codiceFiscale) { return codiceFiscale.charAt(12).toUpperCase(
 
 function dataCf (codiceFiscale) {
 	let [ anno, giorno ] = [ codiceFiscale.substring(6,8), codiceFiscale.substring(9,11) ];
-	giorno = (giorno>40)?giorno-40:"0" + giorno;
-	return (anno < 20 ? "20" : "19" ) + anno + "-" + MESI[codiceFiscale.charAt(8)] + "-" + giorno;
+	giorno = (giorno>40)?"0" + giorno-40:giorno;
+	return (anno < 20 ? "20" : "19" ) + anno + "-" + MESI[codiceFiscale.charAt(8)] + "-" + (giorno>40) + giorno;
 }
 
 function sessoCf (codiceFiscale) { return codiceFiscale.substring(9,11) > 40 ? "F" : "M"; }
