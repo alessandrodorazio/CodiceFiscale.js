@@ -5,7 +5,7 @@ function comuneCf (codiceFiscale) { return codiceFiscale.charAt(12).toUpperCase(
 
 function dataCf (codiceFiscale) {
 	let [ anno, giorno ] = [ codiceFiscale.substring(6,8), codiceFiscale.substring(9,11) ];
-	giorno = (giorno>40)?"0" + giorno-40:giorno;
+	if (giorno>40) giorno -= 40;
 	return (anno < 20 ? "20" : "19" ) + anno + "-" + MESI[codiceFiscale.charAt(8)] + "-" + giorno;
 }
 
